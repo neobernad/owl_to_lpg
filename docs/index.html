@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OWL2LPG</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <link rel="icon" href="assets/favicon.ico">
+  <meta name="description" content="OWL2LPG test">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <!-- Theme: Simple Dark -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
+</head>
+<body>
+  <div id="app">Please wait...</div>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <!-- docsify-themeable (latest v0.x.x) -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0"></script>
+  <!-- Mermaid -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.6/mermaid.min.js"></script>
+  <script>
+    // Mermaid config
+    var num = 0;
+    var config = {
+      startOnLoad:true,
+      flowchart:{
+        useMaxWidth:true,
+        htmlLabels:false,
+        curve:'cardinal',
+      },
+      securityLevel:'loose',
+      theme: "dark", // This uses white arrow head :D 
+      startOnLoad: false
+    };
+
+    mermaid.initialize(config);
+    mermaid.flowchartConfig = {
+        width: "100%"
+    }
+
+    window.$docsify = {
+      el: '#app',
+      themeable: {
+          readyTransition : true, // default
+          responsiveTables: true  // default
+        },
+      name: 'WebProtégé based on LPG model',
+      logo: '/assets/logo.png',
+      repo: 'Undefined',
+      loadSidebar: true,
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md'
+      },
+      subMaxLevel: 3,
+      search: 'auto', // default
+      auto2top: false,
+      search: {
+        maxAge: 60, // Expiration time, the default one day
+        paths: 'auto',
+        placeholder: 'Type to search',
+        noData: 'No results :(',
+        // Headline depth, 1 - 6
+        depth: 3,
+        hideOtherSidebarContent: false, // whether or not to hide other sidebar content
+      },
+      plugins: [
+      function(hook) {
+        var footer = [
+        '<hr/>',
+        '<footer>',
+        '<span>Knowledge Systems &copy; 2020</span>',
+        '&nbsp',
+        '<span> - Powered by &nbsp<img src="https://docsify.js.org/_media/icon.svg" data-origin="https://docsify.js.org/_media/icon.svg" alt="Apache" title="Docsify" width="20"></span>',
+        '</footer>'
+        ].join('');
+
+        hook.afterEach(function(html) {
+          return html + footer;
+        });
+      }
+      ],
+      markdown: {
+        renderer: {
+          code: function(code, lang) {
+            if (lang === "mermaid") {
+              return (
+                '<div class="mermaid">' + mermaid.render('mermaid-svg-' + num++, code) + "</div>"
+                );
+            }
+            return this.origin.code.apply(this, arguments);
+          }
+        }
+      }
+    }
+  </script>
+  <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
+  <style>
+    :root {
+      /* Reduce the font size */
+      --base-font-size: 14px;
+
+      /* Change the theme color hue */
+      /*--theme-hue: 325;*/
+
+      /* Change the sidebar bullets */
+      /*--sidebar-nav-link-before-content: '😀';*/
+    }
+    /* Use custom colors for Mermaid js */ 
+    .aNode > rect { /* Axiom node */
+        fill:#d3d3d3 !important;
+        stroke:#000000 !important;
+        stroke-width:1px !important;
+    }
+    .cNode > rect { /* Class node */
+        fill:#EFCB68 !important;
+        color: #FFFFFF !important;
+        stroke:#000000 !important;
+        stroke-width:1px !important;
+    }
+    .ceNode > rect { /* Class expression node */
+        fill:#00A7E1 !important;
+        color: #FFFFFF !important;
+        stroke:#000000 !important;
+        stroke-width:1px !important;
+    }
+    .pNode > rect, polygon { /* Property node */
+        fill:#F8FCDA !important;
+        color: #FFFFFF !important;
+        stroke:#000000 !important;
+        stroke-width:1px !important;
+    }
+    .edgePath > path {
+      fill:none !important;
+      stroke:#FFFFFF !important;
+    }
+  </style>
+</body>
+</html>
