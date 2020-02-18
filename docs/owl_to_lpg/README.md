@@ -98,7 +98,7 @@ A `:Abnormal_cell` (http://purl.obolibrary.org/obo/CL_0001061) is a subclass of 
 subclass_of('bearer of' some abnormal)
 equivalent_to(cell and ('bearer of' some abnormal))
 ```
-This example states the [Axiom 3](https://protege.stanford.edu/owl-to-lpg/#subclassof-somevaluesfrom-axioms). Take into account that this axiom is also reproducible for its variations. For instance: using `AllValuesFrom` axiom restriction instead of a `SomeValuesFrom` axiom.
+This example is a combination of both [Axiom 3](https://protege.stanford.edu/owl-to-lpg/#subclassof-somevaluesfrom-axioms) and [Axiom 4](https://protege.stanford.edu/owl-to-lpg/#equivalent-intersection-axioms). Take into account that [Axiom 3](https://protege.stanford.edu/owl-to-lpg/#subclassof-somevaluesfrom-axioms) is also reproducible for its variations. For instance: using `AllValuesFrom` axiom restriction instead of a `SomeValuesFrom` axiom.
 
 |**Model** |
 |-------------|
