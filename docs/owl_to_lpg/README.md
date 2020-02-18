@@ -123,7 +123,7 @@ graph TB
     BEARER_OF --> ABNORMAL;
 ```
 
-!> **Important**:  Double edged linkage between `bearer of:ObjectProperty` and `Abnormal:class`.
+!> **Important**:  Double linkage between `bearer of:ObjectProperty` and `Abnormal:class`.
 
 ### Annotation Axioms with Language-Tagged-Literal objects
 
