@@ -90,7 +90,7 @@ graph TB
 
 Here we provide examples of OWL to LPG using the [Cell Ontology][ref_cell_ontology] as use case.
 
-### <img src="https://icongram.jgog.in/material/alert-octagram.svg?color=fff176&amp;size=16"> SubclassOf Axiom with restrictions and EquivalentTo anonymous class 
+### SubclassOf Axiom with restrictions and EquivalentTo anonymous class 
 
 A `:Abnormal_cell` (http://purl.obolibrary.org/obo/CL_0001061) is a subclass of the anonymous class `'bearer of' some abnormal`. Additionally, it is equivalent to two additional classes: `:Cell` (http://purl.obolibrary.org/obo/CL_0000000) and `'bearer of' some abnormal`. The class expression is the following:
 
@@ -113,19 +113,19 @@ graph TB
 
     ABNORMAL_CELL["Abnormal_cell:Class"]:::cNode --> SUBCLASS_OF("subClassOf:Axiom"):::aNode;
     SUBCLASS_OF --> SOME("someValuesFrom:ClassExpression"):::ceNode;
-    SOME --> BEARER_OF["'bearer of':ObjectProperty"]:::pNode;
-    BEARER_OF --> ABNORMAL["Abnormal:Class"]:::cNode
+    SOME --> BEARER_OF_1["'bearer of':ObjectProperty"]:::pNode;
+    BEARER_OF_1 --> ABNORMAL["Abnormal:Class"]:::cNode
 
     ABNORMAL_CELL --> EQ1(equivalentClass:Axiom):::aNode --> AND1("intersectionOf:ClassExpression"):::ceNode;
     AND1 --> CELL["Cell:Class"]:::cNode;
     AND1 --> SOME1("someValuesFrom:ClassExpression"):::ceNode;
-    SOME1 --> BEARER_OF;
-    BEARER_OF --> ABNORMAL;
+    SOME1 --> BEARER_OF_2["'bearer of':ObjectProperty"]:::pNode;
+    BEARER_OF_2 --> ABNORMAL;
 ```
 
-!> **Important**:  Double linkage between `bearer of:ObjectProperty` and `Abnormal:class`.
+!> **Important**:  Object properties are duplicated to avoid multiple linkage between nodes. Otherwise, in this example, the object property `bearer of:ObjectProperty` would provide two links `Abnormal:class`.
 
-### Annotation Axioms with Language-Tagged-Literal objects
+### <img src="https://icongram.jgog.in/material/alert-octagram.svg?color=fff176&amp;size=16"> Annotation Axioms with Language-Tagged-Literal objects
 
 In this example we apply the [Axiom 13](https://protege.stanford.edu/owl-to-lpg/#annotation-assertion-object-axioms), [Axiom 14](https://protege.stanford.edu/owl-to-lpg/#annotation-assertion-literal-axioms) and [Axiom 15](https://protege.stanford.edu/owl-to-lpg/#axiom-annotation-axioms) to represent that the class `:Life_cycle` (`iri: http://purl.obolibrary.org/obo/UBERON_0000104`) has a definition of type `xsd:string`.
 
@@ -133,7 +133,8 @@ In this example we apply the [Axiom 13](https://protege.stanford.edu/owl-to-lpg/
 |**Model** |
 |-------------|
 |**AnnotationAssertion**( :definition :Life_cycle "An entire span of an..."^^xsd:string )|
-|**AnnotationAssertion**( :label :definition "definition"^^xsd:string@en )|
+|**AnnotationAssertion**( :label :definition "definition"^^xsd:string )|
+|**AnnotationAssertion**( :label :definition "definition"@en )|
 
 ```mermaid
 graph TB
@@ -141,13 +142,31 @@ graph TB
 	LIFE_CYCLE["Life_cycle:Class"]:::cNode --> AX1("annotationAssertion:Axiom"):::aNode;
 	AX1 --> DEFINITION>"definition:AnnotationProperty"]:::pNode;
 	DEFINITION --> LITERAL1(["_lit1:Literal<br/> <br/>'value'='An ...'"]):::cNode;
-	LITERAL1 --> STRING_DT(["string:Datatype"]):::cNode;
+	LITERAL1 --> STRING_DT_1(["string:Datatype"]):::cNode;
 
 	DEFINITION --> AX2("annotationAssertion:Axiom"):::aNode;
 	AX2 --> LABEL1>"label:AnnotationProperty"]:::pNode;
 	LABEL1 --> LITERAL2(["_lit2:Literal<br/> <br/>'value'='definition'<br/>'lang'='en'"]):::cNode;
-	LITERAL2 --> STRING_DT(["string:Datatype"]):::cNode;
+	LITERAL2 --> STRING_DT_2(["string:Datatype"]):::cNode;
 ```
+
+---
+
+```mermaid
+graph TB
+
+    LIFE_CYCLE["Life_cycle:Class"]:::cNode --> AX1("annotationAssertion:Axiom"):::aNode;
+    AX1 --> DEFINITION>"definition:AnnotationProperty"]:::pNode;
+    DEFINITION --> LITERAL1(["_lit1:Literal<br/> <br/>'value'='An ...'"]):::cNode;
+    LITERAL1 --> STRING_DT(["string:Datatype"]):::cNode;
+
+    DEFINITION --> AX2("annotationAssertion:Axiom"):::aNode;
+    AX2 --> LABEL1>"label:AnnotationProperty"]:::pNode;
+    LABEL1 --> LITERAL2(["_lit2:Literal<br/> <br/>'value'='definition'<br/>'lang'='en'"]):::cNode;
+    LITERAL2 --> STRING_DT(["string:Datatype"]):::cNode;
+```
+
+!> **Question**:  Data types should be duplicated?.
 
 ### Database cross references
 
@@ -156,7 +175,8 @@ In this case, we use the [previous Section](#annotation-axioms-with-language-tag
 |**Model** |
 |-------------|
 |**AnnotationAssertion**( :definition :Life_cycle "An entire span of an..."^^xsd:string )|
-|**AnnotationAssertion**( :label :definition "definition"^^xsd:string@en )|
+|**AnnotationAssertion**( :label :definition "definition"^^xsd:string )|
+|**AnnotationAssertion**( :label :definition "definition"@en )|
 |**AnnotationAssertion**( :hasDbXref :definition "https://...")|
 
 ```mermaid
@@ -165,12 +185,12 @@ graph TB
 	LIFE_CYCLE["Life_cycle:Class"]:::cNode --> AX1("annotationAssertion:Axiom"):::aNode;
 	AX1 --> DEFINITION>"definition:AnnotationProperty"]:::pNode;
 	DEFINITION --> LITERAL1(["_lit1:Literal<br/> <br/>'value'='An ...'"]):::cNode;
-	LITERAL1 --> STRING_DT(["string:Datatype"]):::cNode;
+	LITERAL1 --> STRING_DT_1(["string:Datatype"]):::cNode;
 
 	DEFINITION --> AX2("annotationAssertion:Axiom"):::aNode;
 	AX2 --> LABEL1>"label:AnnotationProperty"]:::pNode;
 	LABEL1 --> LITERAL2(["_lit2:Literal<br/> <br/>'value'='definition'<br/>'lang'='en'"]):::cNode;
-	LITERAL2 --> STRING_DT(["string:Datatype"]):::cNode;
+	LITERAL2 --> STRING_DT_2(["string:Datatype"]):::cNode;
 
 	DEFINITION --> AX3("annotationAssertion:Axiom"):::aNode;
 	AX3 --> XREF>"hasDbXref:AnnotationProperty"]:::pNode;
