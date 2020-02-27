@@ -125,7 +125,7 @@ graph TB
 
 !> **Important**:  Object properties are duplicated to avoid multiple linkage between nodes. Otherwise, in this example, the object property `bearer of:ObjectProperty` would provide two links `Abnormal:class`.
 
-### <img src="https://icongram.jgog.in/material/alert-octagram.svg?color=fff176&amp;size=16"> Annotation Axioms with Language-Tagged-Literal objects
+### Annotation Axioms with Language-Tagged-Literal objects
 
 In this example we apply the [Axiom 13](https://protege.stanford.edu/owl-to-lpg/#annotation-assertion-object-axioms), [Axiom 14](https://protege.stanford.edu/owl-to-lpg/#annotation-assertion-literal-axioms) and [Axiom 15](https://protege.stanford.edu/owl-to-lpg/#axiom-annotation-axioms) to represent that the class `:Life_cycle` (`iri: http://purl.obolibrary.org/obo/UBERON_0000104`) has a definition of type `xsd:string`.
 
@@ -149,24 +149,6 @@ graph TB
 	LABEL1 --> LITERAL2(["_lit2:Literal<br/> <br/>'value'='definition'<br/>'lang'='en'"]):::cNode;
 	LITERAL2 --> STRING_DT_2(["string:Datatype"]):::cNode;
 ```
-
----
-
-```mermaid
-graph TB
-
-    LIFE_CYCLE["Life_cycle:Class"]:::cNode --> AX1("annotationAssertion:Axiom"):::aNode;
-    AX1 --> DEFINITION>"definition:AnnotationProperty"]:::pNode;
-    DEFINITION --> LITERAL1(["_lit1:Literal<br/> <br/>'value'='An ...'"]):::cNode;
-    LITERAL1 --> STRING_DT(["string:Datatype"]):::cNode;
-
-    DEFINITION --> AX2("annotationAssertion:Axiom"):::aNode;
-    AX2 --> LABEL1>"label:AnnotationProperty"]:::pNode;
-    LABEL1 --> LITERAL2(["_lit2:Literal<br/> <br/>'value'='definition'<br/>'lang'='en'"]):::cNode;
-    LITERAL2 --> STRING_DT(["string:Datatype"]):::cNode;
-```
-
-!> **Question**:  Data types should be duplicated?.
 
 ### Database cross references
 
