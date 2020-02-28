@@ -136,18 +136,17 @@ In this example we apply the [Axiom 13](https://protege.stanford.edu/owl-to-lpg/
 |**AnnotationAssertion**( :label :definition "definition"^^xsd:string )|
 |**AnnotationAssertion**( :label :definition "definition"@en )|
 
+
 ```mermaid
 graph TB
-
-	LIFE_CYCLE["Life_cycle:Class"]:::cNode --> AX1("annotationAssertion:Axiom"):::aNode;
-	AX1 --> DEFINITION>"definition:AnnotationProperty"]:::pNode;
-	DEFINITION --> LITERAL1(["_lit1:Literal<br/> <br/>'value'='An ...'"]):::cNode;
-	LITERAL1 --> STRING_DT_1(["string:Datatype"]):::cNode;
-
-	DEFINITION --> AX2("annotationAssertion:Axiom"):::aNode;
-	AX2 --> LABEL1>"label:AnnotationProperty"]:::pNode;
-	LABEL1 --> LITERAL2(["_lit2:Literal<br/> <br/>'value'='definition'<br/>'lang'='en'"]):::cNode;
-	LITERAL2 --> STRING_DT_2(["string:Datatype"]):::cNode;
+    LIFE_CYCLE["Life_cycle:Class"]:::cNode --> AX1("annotationAssertion:Axiom"):::aNode;
+    AX1 --> DEFINITION>"definition:AnnotationProperty"]:::pNode;
+    DEFINITION --> LITERAL1(["_lit1:Literal<br/> <br/>'value'='An ...'"]):::cNode;
+    LITERAL1 --> STRING_DT(["string:Datatype"]):::cNode;
+    DEFINITION --> AX2("annotationAssertion:Axiom"):::aNode;
+    AX2 --> LABEL1>"label:AnnotationProperty"]:::pNode;
+    LABEL1 --> LITERAL2(["_lit2:Literal<br/> <br/>'value'='definition'<br/>'lang'='en'"]):::cNode;
+    LITERAL2 --> STRING_DT(["string:Datatype"]):::cNode;
 ```
 
 ### Database cross references
